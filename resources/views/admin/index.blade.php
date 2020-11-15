@@ -24,7 +24,7 @@ if($_REQUEST){
 
 
 <content>
-	<h2>GitHug</h2>
+	<h2>GitHub</h2>
 	<form>
 		
 
