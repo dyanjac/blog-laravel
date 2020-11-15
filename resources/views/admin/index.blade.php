@@ -15,3 +15,22 @@ if($_REQUEST){
 }
 
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GitHub</title>
+</head>
+<body>
+
+
+<content>
+	<h2>GitHug</h2>
+	<form>
+		
+
+	</form>
+
+</content>
+
+</body>
+</html>
