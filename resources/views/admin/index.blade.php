@@ -9,6 +9,7 @@ if($_REQUEST){
 	echo "<BR>tiwter</br> ";
 	echo "Facebook ";
 	echo "Facebook Nuevo Cambio";
+	echo '<h1 style="color:blue;backgorund-color:green;" >Facebook Nuevo Cambio<h1>';
 
 }
 
