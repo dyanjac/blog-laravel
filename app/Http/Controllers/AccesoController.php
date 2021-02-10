@@ -16,7 +16,18 @@ class AccesoController extends Controller
      */
     public function index()
     {
-          return view('admin.index', array("datos" => "HOLA MUNDO") );
+
+                $noticias=\DB::select("SELECT * FROM noticias where estado='actual' order by codNot desc"); 
+          return view('admin.noticias', array("datos" => session('datos') , "usuario" => session('user') , "noticias" => $noticias) );
+    }
+
+
+     public function login()
+    {   
+
+
+         // return view('AdminLTE.pages.login', array("datos" => "HOLA MUNDO jojojojoojo") );
+          return view('admin.login', array("datos" => "HOLA MUNDO jojojojoojo") );
     }
 
     /**
@@ -26,9 +37,37 @@ class AccesoController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.noticias-create', array("msg" => "Credenciales Incorrectas!" ) );
     }
 
+
+     public function acceso(Request $request)
+    {           
+                $usuario= md5($request['usuario']) ;
+                $clave= md5($request['clave']); 
+
+                $sql = "select count(*) as active from usuario where user='$usuario' and pas='$clave' and estado='activo' ";
+                $acceso=\DB::select($sql);
+
+                if($acceso[0]->active > 0)
+                {
+                        $sql = "select *  from usuario where user='$usuario' and pas='$clave' and estado='activo' ";
+                        $acceso=\DB::select($sql); 
+                        
+                        $noticias=\DB::select("SELECT * FROM noticias where estado='actual' order by codNot desc "); 
+
+                        session(['user' => $request['usuario']]);
+                        session(['datos' => $acceso ]);
+
+                        return view('admin.noticias', array("datos" => $acceso , "usuario" => $request['usuario'] , "noticias" => $noticias) );
+
+                }else{
+
+                    return view('admin.login', array("msg" => "Credenciales Incorrectas!" ) );
+                }
+
+          
+    }
     /**
      * Store a newly created resource in storage.
      *
