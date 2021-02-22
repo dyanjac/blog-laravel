@@ -46,7 +46,8 @@ class NoticiaController extends Controller
     public function index()
     {
         
-
+           $noticias=\DB::select("SELECT * FROM noticias where estado='actual' order by codNot desc"); 
+          return view('admin.noticias', array("datos" => session('datos') , "usuario" => session('user') , "noticias" => $noticias) );
 
     }
 
